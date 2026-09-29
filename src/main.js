@@ -22,7 +22,7 @@ async function loadFile(file){
   const gfx=extractGFX(bytes),map=extractMap(bytes),gff=extractGFF(bytes),lua=transpileLua(extractLua(bytes));
   picoAPI.bindAPIResources(ctx,keys,{gfx,map,gff});vm=new LuaVM();
   Object.entries(picoAPI).forEach(([n,fn])=>{if(typeof fn==="function"&&n!=="bindAPIResources")vm.addFunction(n,fn)});
-  if(!vm.executeCode(lua))throw new Error("The cartridge Lua code could not be executed.");
+  if(!vm.executeCode(lua))throw new Error("See the Lua error shown above.");
   vm.callFunction("_init");keys.fill(false);noMsg.style.display="none";status.textContent="Playing: "+file.name;canvas.focus();
   if(raf)cancelAnimationFrame(raf);last=performance.now();acc=0;loop(last);
  }catch(e){console.error(e);status.textContent="Could not load: "+(e?.message||String(e))}
