@@ -1,7 +1,7 @@
 import {arrayEquals} from "../utils.js";
 const enc=new TextEncoder();
 
-const LEGACY_LITERAL_TABLE = new TextEncoder().encode("#\n 0123456789abcdefghijklmnopqrstuvwxyz!#%(){}[]<>+=/*:;.,~_");
+const LEGACY_LITERAL_TABLE = new TextEncoder().encode("^\n 0123456789abcdefghijklmnopqrstuvwxyz!#%(){}[]<>+=/*:;.,~_");
 const FUTURE_CODE1 = "if(_update60)_update=function()_update60()_update60()end";
 const FUTURE_CODE2 = "if(_update60)_update=function()_update60()_update_buttons()_update60()end";
 
