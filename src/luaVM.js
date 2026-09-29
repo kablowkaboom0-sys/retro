@@ -6,5 +6,5 @@ export default class LuaVM{
  addFunction(n,fn){lua.lua_pushjsfunction(this.L,fn);lua.lua_setglobal(this.L,to_luastring(n))}
  #push(v){if(typeof v==="number")lua.lua_pushnumber(this.L,v);else if(typeof v==="string")lua.lua_pushstring(this.L,to_luastring(v));else if(typeof v==="boolean")lua.lua_pushboolean(this.L,v);else lua.lua_pushnil(this.L)}
  #read(i){if(lua.lua_isnumber(this.L,i))return lua.lua_tonumber(this.L,i);if(lua.lua_isstring(this.L,i))return to_jsstring(lua.lua_tostring(this.L,i));if(lua.lua_isboolean(this.L,i))return lua.lua_toboolean(this.L,i);return null}
- #err(p){const m=lua.lua_tostring(this.L,-1);console.error(p,m?to_jsstring(m):"");lua.lua_pop(this.L,1);return false}
+ #err(p){const m=lua.lua_tostring(this.L,-1);const detail=m?to_jsstring(m):"unknown Lua error";console.error(p,detail);lua.lua_pop(this.L,1);const el=document.getElementById("status");if(el)el.textContent=p+": "+detail;return false}
 }
