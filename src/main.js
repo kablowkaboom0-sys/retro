@@ -1,7 +1,7 @@
-import {extractPico8Bytes,extractGFX,extractMap,extractGFF,extractLua} from "./cartridge/index.js?v=9";
-import LuaVM from "./luaVM.js?v=9";
-import transpileLua from "./transpileLua.js?v=9";
-import * as picoAPI from "./pico8api.js?v=9";
+import {extractPico8Bytes,extractGFX,extractMap,extractGFF,extractLua} from "./cartridge/index.js?v=10";
+import LuaVM from "./luaVM.js?v=10";
+import transpileLua from "./transpileLua.js?v=10";
+import * as picoAPI from "./pico8api.js?v=10";
 const FPS=30,FRAME=1000/FPS,keys=new Array(8).fill(false);
 let vm=null,raf=null,last=0,acc=0;
 const canvas=document.createElement("canvas");canvas.width=128;canvas.height=128;canvas.tabIndex=0;
