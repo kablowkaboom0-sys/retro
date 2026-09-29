@@ -21,7 +21,7 @@ canvas{display:block;width:100%;height:100%;image-rendering:pixelated;outline:no
 <p>Select your own <b>.p8.png</b> cartridge. The game stays in your browser.</p>
 <input id="cart-file" type="file" accept=".p8.png,image/png">
 <button id="load-button">Load PICO-8 PNG</button>
-<div class="status" id="status">Emulator v9 • loading…</div>
+<div class="status" id="status">Emulator v10 • loading…</div>
 <div class="game-container"><div id="no-cart-message">Choose a .p8.png file above.</div></div>
 <script>
 addEventListener("error",e=>{const s=document.getElementById("status");if(s)s.textContent="JavaScript error: "+(e.message||"module failed to load")});
