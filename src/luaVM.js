@@ -1,4 +1,4 @@
-import {lua,lauxlib,lualib,to_luastring,to_jsstring} from "https://esm.sh/fengari-web@0.1.4";
+import {lua,lauxlib,lualib,to_luastring,to_jsstring} from "https://cdn.jsdelivr.net/npm/fengari-web@0.1.4/dist/fengari-web.js";
 export default class LuaVM{
  constructor(){this.L=lauxlib.luaL_newstate();lualib.luaL_openlibs(this.L);this.isReady=true}
  executeCode(code){try{const c=to_luastring(code),r=lauxlib.luaL_loadbuffer(this.L,c,c.length,to_luastring("chunk"));if(r!==lua.LUA_OK)return this.#err("Lua load error");return lua.lua_pcall(this.L,0,0,0)===lua.LUA_OK||this.#err("Lua execution error")}catch(e){console.error(e);return false}}
