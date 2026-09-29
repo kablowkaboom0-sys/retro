@@ -1,0 +1,1 @@
+export default function extractMap(b){const m=new Uint8Array(8192);m.set(b.subarray(0x2000,0x3000),0);m.set(b.subarray(0x1000,0x2000),4096);return m;}
