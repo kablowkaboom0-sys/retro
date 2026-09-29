@@ -17,7 +17,7 @@ async function loadFile(file){
  if(!file.name.toLowerCase().endsWith(".p8.png")){status.textContent="Please choose a .p8.png cartridge.";return}
  try{
   status.textContent="Loading "+file.name+"…";
-  const url=URL.createObjectURL(file),bytes=await extractPico8Bytes(url);URL.revokeObjectURL(url);
+  const bytes=await extractPico8Bytes(file);
   const gfx=extractGFX(bytes),map=extractMap(bytes),gff=extractGFF(bytes),lua=transpileLua(extractLua(bytes));
   picoAPI.bindAPIResources(ctx,keys,{gfx,map,gff});vm=new LuaVM();
   Object.entries(picoAPI).forEach(([n,fn])=>{if(typeof fn==="function"&&n!=="bindAPIResources")vm.addFunction(n,fn)});
