@@ -14,17 +14,18 @@ addEventListener("keydown",e=>{const k=keyMap[e.key];if(k!==undefined){keys[k]=t
 addEventListener("keyup",e=>{const k=keyMap[e.key];if(k!==undefined){keys[k]=false;e.preventDefault()}});
 async function loadFile(file){
  if(!file)return;
- if(!file.name.toLowerCase().endsWith(".p8.png")){status.textContent="Please choose a .p8.png cartridge.";return}
+ if(file.type && file.type!=="image/png"){status.textContent="Please choose a PNG cartridge file.";return}
  try{
-  status.textContent="Loading "+file.name+"…";
+  status.textContent="Reading "+file.name+"…";
   const bytes=await extractPico8Bytes(file);
+  status.textContent="Cartridge PNG detected. Starting…";
   const gfx=extractGFX(bytes),map=extractMap(bytes),gff=extractGFF(bytes),lua=transpileLua(extractLua(bytes));
   picoAPI.bindAPIResources(ctx,keys,{gfx,map,gff});vm=new LuaVM();
   Object.entries(picoAPI).forEach(([n,fn])=>{if(typeof fn==="function"&&n!=="bindAPIResources")vm.addFunction(n,fn)});
   if(!vm.executeCode(lua))throw new Error("The cartridge Lua code could not be executed.");
   vm.callFunction("_init");keys.fill(false);noMsg.style.display="none";status.textContent="Playing: "+file.name;canvas.focus();
   if(raf)cancelAnimationFrame(raf);last=performance.now();acc=0;loop(last);
- }catch(e){console.error(e);status.textContent="Could not load: "+e.message}
+ }catch(e){console.error(e);status.textContent="Could not load: "+(e?.message||String(e))}
 }
 function loop(t){if(!vm)return;const d=t-last;last=t;acc+=d;while(acc>=FRAME){ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,128,128);vm.callFunction("_update");vm.callFunction("_draw");acc-=FRAME}raf=requestAnimationFrame(loop)}
 loadBtn.onclick=()=>loadFile(fileInput.files[0]);
