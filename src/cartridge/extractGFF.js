@@ -1,0 +1,1 @@
+export default function extractGFF(b){return b.subarray(0x3000,0x3100);}
