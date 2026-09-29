@@ -1,4 +1,4 @@
-import {lua} from "https://esm.sh/fengari-web@0.1.4";
+const {lua}=window.fengari;
 let ctx=null,keys=null,gfx=null,mapd=null,gff=null,cx=0,cy=0;
 const P=["#000000","#1D2B53","#7E2553","#008751","#AB5236","#5F574F","#C2C3C7","#FFF1E8","#FF004D","#FFA300","#FFEC27","#00E436","#29ADFF","#83769C","#FF77A8","#FFCCAA"];
 export function bindAPIResources(c,k,r){ctx=c;keys=k;({gfx,map:mapd,gff}=r)}
