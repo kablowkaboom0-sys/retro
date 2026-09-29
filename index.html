@@ -3,30 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>PICO Games — Web Emulator</title>
+<title>PICO Games — Your PNGs</title>
 <style>
 body{margin:0;background:#111;color:#eee;font-family:system-ui,-apple-system,sans-serif;text-align:center}
-header{padding:18px}h1{margin:0 0 6px}p{color:#aaa}
-main{width:min(1000px,94vw);margin:auto}.player{background:#000;border:2px solid #333;border-radius:14px;overflow:hidden}
-iframe{display:block;width:100%;height:min(720px,78vh);min-height:520px;border:0}
-.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px}
-button,a{border:1px solid #444;background:#222;color:#fff;border-radius:9px;padding:10px 14px;text-decoration:none;cursor:pointer}
+main{width:min(900px,94vw);margin:auto;padding:20px 0}
+h1{margin:0 0 6px}p{color:#aaa}
+button,input{border:1px solid #444;background:#222;color:#fff;border-radius:9px;padding:11px 14px;margin:5px}
+input{max-width:90%}
+.game-container{margin:18px auto;background:#000;border:2px solid #333;border-radius:14px;overflow:hidden;width:min(640px,94vw);aspect-ratio:1}
+canvas{display:block;width:100%;height:100%;image-rendering:pixelated;outline:none}
+#no-cart-message{padding:30px;color:#aaa}
+.status{min-height:24px;color:#aaa}
 </style>
 </head>
 <body>
-<header>
-<h1>🎮 PICO Games</h1>
-<p>Browser-based PICO-8-style emulator frontend. It does not use the paid/native PICO-8 runtime.</p>
-</header>
 <main>
-<div class="player">
-<iframe id="emulator" src="https://pico8-web-emulator.vercel.app/" title="PICO web emulator" allow="autoplay; fullscreen"></iframe>
-</div>
-<div class="actions">
-<button onclick="document.getElementById('emulator').src='https://pico8-web-emulator.vercel.app/'">Reload emulator</button>
-<a href="https://pico8-web-emulator.vercel.app/" target="_blank" rel="noopener">Open directly</a>
-</div>
-<p>The embedded emulator is an independent open-source project and currently has limited cartridge support.</p>
+<h1>🎮 PICO Games</h1>
+<p>Select your own <b>.p8.png</b> cartridge. The game stays in your browser.</p>
+<input id="cart-file" type="file" accept=".p8.png,image/png">
+<button id="load-button">Load PICO-8 PNG</button>
+<div class="status" id="status">No cartridge loaded</div>
+<div class="game-container"><div id="no-cart-message">Choose a .p8.png file above.</div></div>
+<p>Keyboard: Arrow keys. Compatibility depends on this open-source PICO-8-style emulator.</p>
 </main>
+<script type="module" src="./src/main.js"></script>
 </body>
 </html>
